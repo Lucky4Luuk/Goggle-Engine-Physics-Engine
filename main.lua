@@ -10,6 +10,10 @@ function love.load()
   local i = #meshes+1
   table.insert(meshes, mesh:new("cube.obj", {0,0,2}, {0,45,0}))
   meshes[i]:load()
+  i = i + 1
+  table.insert(meshes, mesh:new("plane.obj", {0,1,0}, {0,45,0}))
+  meshes[i]:load()
+  i = i + 1
 end
 
 function FixedUpdate()

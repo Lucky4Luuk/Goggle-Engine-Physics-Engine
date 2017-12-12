@@ -16,10 +16,14 @@ function string.split(str,sep)
 end
 
 function mesh:new(filename, position, rotation)
-  o = {vertices = {}, normals = {}, faces = {}, filename = filename, pos = position, rot = rotation}
+  o = {vertices = {}, normals = {}, faces = {}, filename = filename, pos = position, rot = rotation, aabb = {{0,0,0},{0,0,0}}}
   setmetatable(o, self)
   self.__index = self
   return o
+end
+
+function mesh:getAABB()
+  return self.aabb
 end
 
 function mesh:load()
@@ -111,7 +115,9 @@ function mesh:draw(width, height, cam_pos, cam_rot)
         table.insert(points, spos[2])
       end
     end
-    love.graphics.line(points)
+    if #points > 3 then
+      love.graphics.line(points)
+    end
   end
 end
 
